@@ -2,6 +2,7 @@
 // Sobre la casa: foto vertical con marco dorado desplazado, `declaracion` (frase corta en cursiva grande),
 // `texto` en párrafos (línea en blanco entre párrafos) y `items` (valores) en una fila numerada.
 import { seccion, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Imagen from '../ui/Imagen.astro';
 interface Props { id: string }
@@ -15,7 +16,7 @@ const romanos = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'X
       <div class:list={['grid items-center gap-12', s.imagen ? 'md:grid-cols-[5fr_7fr] md:gap-20' : 'max-w-3xl mx-auto']}>
         {s.imagen && (
           <div class="marco">
-            <Imagen src={s.imagen} alt="" ancho={900} alto={1200} class="aspect-[3/4] w-full object-cover" />
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={900} alto={1200} class="aspect-[3/4] w-full object-cover" />
           </div>
         )}
         <div>

@@ -3,6 +3,7 @@
 // La cabecera es transparente encima (ver Header.astro). `items`: detalles cortos en una línea bajo los botones.
 // Sin `cta`, el primer botón llama por teléfono; sin `cta_secundario`, el segundo lleva al mapa.
 import { seccion, site, tel, mapa } from '../../data/site';
+import { altHero } from '../../lib/seo';
 import Imagen from '../ui/Imagen.astro';
 interface Props { id: string; primera?: boolean }
 const { id, primera = false } = Astro.props;
@@ -21,7 +22,7 @@ const externo = (u: string) => /^https?:/.test(u);
   s && (
     <section id={id} class="portada">
       <div class="portada-fondo" aria-hidden="true">
-        <Imagen src={s.imagen} alt="" ancho={1920} alto={1080} prioridad={primera} class="h-full w-full object-cover" />
+        <Imagen src={s.imagen} alt={altHero()} ancho={1920} alto={1080} prioridad={primera} class="h-full w-full object-cover" />
       </div>
       <div class="contenedor portada-contenido">
         {s.antetitulo && <p class="antetitulo antetitulo--claro">{s.antetitulo}</p>}

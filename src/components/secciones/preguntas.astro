@@ -1,0 +1,40 @@
+---
+// Preguntas frecuentes: acordeón nativo <details> con filetes dorados y la pregunta en la serif de los
+// títulos, sin JavaScript. Campos: `preguntas[]` (pregunta, respuesta). Sin preguntas no se pinta.
+// También sirve de diseño para apartados nuevos (`tipo: preguntas`).
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const preguntas = s ? s.preguntas.filter((p) => p && p.pregunta) : [];
+---
+
+{
+  s && preguntas.length > 0 && (
+    <Seccion id={Astro.props.id} contenedor="max-w-3xl">
+      <Titular alinear="centro" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      <div class="faq-lista">
+        {preguntas.map((p) => (
+          <details class="faq">
+            <summary>
+              <span class="font-display text-xl">{p.pregunta}</span>
+              <span class="faq-signo" aria-hidden="true">+</span>
+            </summary>
+            {p.respuesta && <p class="faq-respuesta">{p.respuesta}</p>}
+          </details>
+        ))}
+      </div>
+    </Seccion>
+  )
+}
+
+<style>
+  .faq-lista { border-top: 1px solid var(--filete); }
+  .faq { border-bottom: 1px solid var(--filete); }
+  .faq summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; justify-content: space-between; gap: 1.25rem; padding-block: 1.35rem; color: var(--c-primario); }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq-signo { flex-shrink: 0; font-family: var(--fuente-titulos); font-size: 1.6rem; line-height: 1; color: var(--c-acento); transition: transform 0.2s ease; }
+  .faq[open] .faq-signo { transform: rotate(45deg); }
+  .faq-respuesta { padding-bottom: 1.5rem; padding-right: 2.5rem; opacity: 0.8; }
+</style>

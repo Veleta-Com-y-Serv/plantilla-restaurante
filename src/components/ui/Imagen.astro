@@ -5,6 +5,7 @@ interface Props { src?: string; alt?: string; ancho?: number; alto?: number; cla
 const { src, alt = '', ancho = 800, alto = 600, class: clase = '', prioridad = false } = Astro.props;
 const respaldo = src && src.startsWith('/fotos/') ? src.replace('/fotos/', '/placeholders/').replace(/\.[a-z0-9]+$/i, '.svg') : '';
 const alFallar = respaldo ? `this.onerror=null;this.src='${respaldo}'` : undefined;
+// `alt` vacío = foto decorativa (también aria-hidden). Las de contenido llevan su alt (src/lib/seo.ts: altHero, altFicha…).
 ---
 
 {
@@ -12,6 +13,7 @@ const alFallar = respaldo ? `this.onerror=null;this.src='${respaldo}'` : undefin
     <img
       src={src}
       alt={alt}
+      aria-hidden={alt === '' ? 'true' : undefined}
       width={ancho}
       height={alto}
       class={clase}

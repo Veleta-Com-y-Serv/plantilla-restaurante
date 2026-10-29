@@ -4,6 +4,7 @@
 // Sin precio no hay puntos ni cifra. Bloque aparte opcional `menu_dia: {titulo, precio, texto}` (una línea por plato)
 // y foto opcional (`imagen`). A dos columnas en escritorio.
 import { seccion, agrupar, lineas } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
@@ -21,7 +22,7 @@ const m = s?.menu_dia;
       <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
       {(m || s.imagen) && (
         <div class:list={['carta-cabeza', { 'carta-cabeza--doble': m && s.imagen }]}>
-          {s.imagen && <Imagen src={s.imagen} alt="" ancho={1200} alto={900} class="carta-foto" />}
+          {s.imagen && <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={900} class="carta-foto" />}
           {m && (
             <div class="menu-dia">
               {m.titulo && <h3 class="menu-dia-titulo">{m.titulo}</h3>}

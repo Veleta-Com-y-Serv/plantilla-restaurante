@@ -137,6 +137,17 @@ secciones:
       - { texto: "Sitio tranquilo, trato de casa y un menú del día que no tiene nada de menú.", autor: Raúl M., nota: Google }
       - { texto: "Celebramos aquí el cumpleaños de mi padre. Nos prepararon todo con mucho cariño.", autor: Pilar S. }
 
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Antes de venir
+    preguntas:
+      - { pregunta: "¿Hace falta reservar?", respuesta: "Los fines de semana, sí: la sala es pequeña y se llena. Entre semana suele haber mesa, pero mejor avisar con un mensaje." }
+      - { pregunta: "¿Tenéis menú del día?", respuesta: "Sí, a mediodía. Cambia cada semana según lo que trae la sierra: primero, segundo, postre casero, pan y vino de la casa." }
+      - { pregunta: "¿Se puede pedir el cabrito entre semana?", respuesta: "Sí, por encargo. Llámanos con un día de antelación y te lo tenemos listo a la hora que nos digas." }
+      - { pregunta: "¿Adaptáis platos por alergias o intolerancias?", respuesta: "Sí. Dínoslo al reservar y te contamos qué platos de la carta podemos preparar sin ese ingrediente." }
+      - { pregunta: "¿Admitís grupos?", respuesta: "Sí. Para más de 8 personas, mejor reservar por teléfono para preparar la mesa y, si queréis, un menú cerrado." }
+
   contacto:
     activa: true
     antetitulo: Contacto

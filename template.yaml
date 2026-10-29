@@ -10,10 +10,11 @@ secciones:
   - { id: reservas, nombre: Reservas }
   - { id: horario-ubicacion, nombre: Horario y ubicación }
   - { id: opiniones, nombre: Opiniones }
+  - { id: preguntas, nombre: Preguntas frecuentes }
   - { id: contacto, nombre: Contacto }
 estilo: elegante
 plan_minimo: gratis
-version: 1.1.0
+version: 1.2.0
 base: astrowind
 demo_url: https://demo-plantilla-restaurante.noexpertise.com
 activa: true
@@ -62,6 +63,12 @@ asistente:
     ayuda: "Por ejemplo: de martes a domingo, de 13 a 16 h y de 20 a 23 h."
     tipo: lista
     campos: [secciones.horario-ubicacion.horario]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué os preguntan más a menudo? Escribe cada pregunta y lo que respondéis."
+    ayuda: "Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
   - id: fotos
     titulo: "Tus fotos"
     pregunta: "Pon una foto de portada y, si quieres, alguna más."

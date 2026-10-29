@@ -2,6 +2,7 @@
 // Horario y ubicación: horario (`horario` [{dia, horas}]) en serif con filetes, foto o plano (`imagen`)
 // y la dirección de site.yaml → contacto con botón a mapas (sin iframe, para que la web vaya rápida).
 import { seccion, site, mapa, tel } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
@@ -54,7 +55,7 @@ const c = site.contacto;
             </a>
           ) : (
             <div class="marco marco--fino">
-              <Imagen src={s.imagen} alt="" ancho={1200} alto={900} class="aspect-[4/3] w-full object-cover" />
+              <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={900} class="aspect-[4/3] w-full object-cover" />
             </div>
           )
         )}
