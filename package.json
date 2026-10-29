@@ -1,6 +1,6 @@
 {
   "name": "plantilla-restaurante",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Plantilla NoExpertise «Restaurante y bar» basada en AstroWind (MIT)",
   "private": true,
   "type": "module",

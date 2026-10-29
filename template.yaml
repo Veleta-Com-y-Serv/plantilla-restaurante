@@ -13,8 +13,66 @@ secciones:
   - { id: contacto, nombre: Contacto }
 estilo: elegante
 plan_minimo: gratis
-version: 1.0.0
+version: 1.1.0
 base: astrowind
 demo_url: https://demo-plantilla-restaurante.noexpertise.com
 activa: true
 orden: 70
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu restaurante"
+    pregunta: "¿Cómo se llama tu restaurante o bar y qué cocina tenéis?"
+    ayuda: "Por ejemplo: cocina casera, tapas o menú del día, para quién y en qué zona."
+    tipo: texto
+    campos: [nombre, eslogan, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.texto, seo.descripcion]
+  - id: contacto
+    titulo: "Cómo te encuentran"
+    pregunta: "¿Dónde estáis y cómo os pueden llamar o reservar?"
+    ayuda: "Solo lo que quieras que vean tus clientes. Lo que dejes vacío no sale en tu web."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, redes.instagram, redes.facebook]
+  - id: carta
+    titulo: "Tu carta"
+    pregunta: "Cuéntame los platos que quieres enseñar: uno por línea, con el precio si quieres."
+    ayuda: "Puedes poner delante la parte de la carta (Entrantes, Principales, Postres). Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.carta.platos]
+  - id: menu-dia
+    titulo: "Menú del día"
+    pregunta: "¿Tenéis menú del día? Cuéntame qué incluye y cuánto cuesta."
+    ayuda: "Si no tenéis, salta este paso."
+    tipo: texto
+    campos: [secciones.carta.titulo, secciones.carta.texto, secciones.carta.menu_dia.titulo, secciones.carta.menu_dia.precio, secciones.carta.menu_dia.texto]
+  - id: sobre
+    titulo: "Vuestra casa"
+    pregunta: "¿Cómo es vuestra casa? Quién está detrás y qué os hace distintos."
+    tipo: texto
+    campos: [secciones.sobre.titulo, secciones.sobre.declaracion, secciones.sobre.texto, secciones.sobre.items]
+  - id: reservas
+    titulo: "Reservas"
+    pregunta: "¿Cómo se reserva mesa? Por teléfono, por WhatsApp, para grupos…"
+    tipo: texto
+    campos: [secciones.reservas.titulo, secciones.reservas.texto, secciones.reservas.items, secciones.reservas.nota]
+  - id: horario
+    titulo: "Horario"
+    pregunta: "¿Qué días y a qué horas abrís?"
+    ayuda: "Por ejemplo: de martes a domingo, de 13 a 16 h y de 20 a 23 h."
+    tipo: lista
+    campos: [secciones.horario-ubicacion.horario]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon una foto de portada y, si quieres, alguna más."
+    ayuda: "Sube las tuyas o elige una del banco. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen, secciones.carta.imagen, secciones.sobre.imagen, secciones.galeria.galeria, secciones.horario-ubicacion.imagen]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige los colores de tu web y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso
