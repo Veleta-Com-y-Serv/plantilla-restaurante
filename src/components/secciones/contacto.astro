@@ -1,0 +1,52 @@
+---
+// Contacto: teléfono, WhatsApp y email en una lista con filetes finos (lo que más se usa, primero) y formulario al lado.
+import { seccion, site, tel, whatsapp } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} class="contacto">
+      <div class="grid gap-12 md:grid-cols-[5fr_6fr] md:gap-20">
+        <div>
+          <Titular alinear="izquierda" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+          <ul class="vias">
+            {c.telefono && (
+              <li>
+                <a href={tel(c.telefono)}>
+                  <Icono nombre="telefono" class="shrink-0 text-acento" />
+                  <span><span class="vias-etiqueta">Teléfono</span><span class="vias-dato">{c.telefono}</span></span>
+                </a>
+              </li>
+            )}
+            {c.whatsapp && (
+              <li>
+                <a href={whatsapp(c.whatsapp, `Hola, os escribo desde la web de ${site.nombre}`)} rel="noopener" target="_blank">
+                  <Icono nombre="whatsapp" class="shrink-0 text-acento" />
+                  <span><span class="vias-etiqueta">WhatsApp</span><span class="vias-dato">{c.whatsapp}</span></span>
+                </a>
+              </li>
+            )}
+            {c.email && (
+              <li>
+                <a href={`mailto:${c.email}`}>
+                  <Icono nombre="correo" class="shrink-0 text-acento" />
+                  <span class="min-w-0"><span class="vias-etiqueta">Email</span><span class="vias-dato break-words">{c.email}</span></span>
+                </a>
+              </li>
+            )}
+          </ul>
+        </div>
+        <div class="hoja hoja--clara">
+          <FormularioContacto prefijo={`c-${Astro.props.id}`} boton="Enviar" />
+        </div>
+      </div>
+    </Seccion>
+  )
+}

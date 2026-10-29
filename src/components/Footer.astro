@@ -1,0 +1,69 @@
+---
+// Pie oscuro: horario y dirección en grande (site.yaml → contacto), teléfono, email, redes, menú y aviso legal.
+// «Web creada con NoExpertise» se muestra si site.yaml → marca_pie no es false (plan gratis).
+import { site, tel, mapa } from '../data/site';
+import Icono from './ui/Icono.astro';
+interface Props { variante?: string }
+const { variante = 'velada' } = Astro.props;
+const c = site.contacto;
+const redes = Object.entries(site.redes).filter(([, url]) => url);
+const anio = new Date().getFullYear();
+---
+
+<footer class={`pie pie--${variante}`}>
+  <div class="contenedor">
+    <p class="pie-nombre">{site.nombre}</p>
+    {site.eslogan && <p class="pie-eslogan">{site.eslogan}</p>}
+    <div class="pie-grande">
+      {
+        c.horario && (
+          <div>
+            <p class="pie-titulo">Horario</p>
+            <p class="pie-dato">{c.horario}</p>
+          </div>
+        )
+      }
+      {
+        c.direccion && (
+          <div>
+            <p class="pie-titulo">Dónde estamos</p>
+            <p class="pie-dato">
+              <a href={mapa(c.direccion)} rel="noopener" target="_blank">{c.direccion}</a>
+            </p>
+          </div>
+        )
+      }
+    </div>
+    <div class="pie-fila">
+      <ul class="pie-lista pie-lista--fila">
+        {c.telefono && <li><a href={tel(c.telefono)}>{c.telefono}</a></li>}
+        {c.email && <li><a href={`mailto:${c.email}`}>{c.email}</a></li>}
+        {site.menu.map((e) => <li><a href={e.url}>{e.texto}</a></li>)}
+      </ul>
+      {
+        redes.length > 0 && (
+          <ul class="pie-redes">
+            {redes.map(([red, url]) => (
+              <li>
+                <a href={url} rel="noopener" target="_blank" aria-label={red}>
+                  <Icono nombre={red} tam={20} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </div>
+  <div class="contenedor pie-legal">
+    <span>© {anio} {site.nombre}</span>
+    <a href="/aviso-legal">Aviso legal y privacidad</a>
+    {
+      site.marca_pie && (
+        <span class="pie-noexpertise">
+          Web creada con <a href="https://noexpertise.com" rel="noopener">NoExpertise</a>
+        </span>
+      )
+    }
+  </div>
+</footer>

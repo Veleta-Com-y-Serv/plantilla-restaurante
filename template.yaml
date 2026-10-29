@@ -1,0 +1,20 @@
+id: restaurante
+nombre: Restaurante y bar
+descripcion: Web elegante para restaurantes y bares, con carta, reservas, fotos y horario a la vista.
+sectores: [restaurante, bar, cafeteria, hosteleria]
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: carta, nombre: Carta }
+  - { id: sobre, nombre: Nuestra casa }
+  - { id: galeria, nombre: Fotos }
+  - { id: reservas, nombre: Reservas }
+  - { id: horario-ubicacion, nombre: Horario y ubicación }
+  - { id: opiniones, nombre: Opiniones }
+  - { id: contacto, nombre: Contacto }
+estilo: elegante
+plan_minimo: gratis
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-restaurante.noexpertise.com
+activa: true
+orden: 70

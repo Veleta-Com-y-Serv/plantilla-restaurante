@@ -1,0 +1,30 @@
+---
+// Opiniones: citas en cursiva con comilla dorada grande, autor en versalitas y `nota` opcional (de dónde viene).
+// Sin estrellas ni puntuaciones: solo lo que dice el cliente. Sin opiniones, la sección no se pinta.
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+---
+
+{
+  s && s.testimonios.length > 0 && (
+    <Seccion id={Astro.props.id} class="opiniones">
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      <ul class:list={['opiniones-lista', { 'opiniones-lista--una': s.testimonios.length === 1 }]}>
+        {s.testimonios.map((t) => (
+          <li>
+            <figure>
+              <blockquote class="opinion-texto">{t.texto}</blockquote>
+              <figcaption class="opinion-autor">
+                {t.autor}
+                {t.nota && <span class="opinion-nota">{t.nota}</span>}
+              </figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </Seccion>
+  )
+}

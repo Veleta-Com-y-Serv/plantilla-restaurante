@@ -1,0 +1,55 @@
+---
+// Cabecera «velada»: fija arriba. Si la página empieza por la portada a pantalla completa, es transparente sobre la foto
+// y pasa a fondo sólido al bajar (script mínimo al final). Sin JavaScript se queda sólida, que también funciona.
+// En móvil, menú plegable con <details>. El aspecto está en src/styles/global.css (.cabecera--velada).
+import { site } from '../data/site';
+import type { Enlace } from '../data/site';
+interface Props { variante?: string; cta?: Enlace | null }
+const { variante = 'velada', cta = null } = Astro.props;
+---
+
+<header class={`cabecera cabecera--${variante}`} data-cabecera>
+  <div class="contenedor cabecera-fila">
+    <a href="/" class="marca" aria-label={`${site.nombre}, inicio`}>
+      {
+        site.logo ? (
+          <img src={site.logo} alt={site.nombre} class="marca-logo" width="160" height="40" />
+        ) : (
+          <span class="marca-nombre">{site.nombre}</span>
+        )
+      }
+    </a>
+    <nav class="cabecera-nav" aria-label="Menú principal">
+      {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+    </nav>
+    {cta && cta.url && <a href={cta.url} class="btn-sec cabecera-cta">{cta.texto}</a>}
+    {
+      site.menu.length > 0 && (
+        <details class="menu-movil">
+          <summary>
+            <span class="menu-movil-icono" aria-hidden="true" />
+            <span>Menú</span>
+          </summary>
+          <nav class="menu-movil-panel" aria-label="Menú">
+            {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+            {cta && cta.url && <a href={cta.url} class="btn">{cta.texto}</a>}
+          </nav>
+        </details>
+      )
+    }
+  </div>
+</header>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.menu-movil a').forEach(function (a) {
+      a.addEventListener('click', function () { a.closest('details').open = false; });
+    });
+    var raiz = document.documentElement;
+    var portada = document.querySelector('main > .portada:first-child');
+    if (!portada) return;
+    function revisar() { raiz.classList.toggle('sobre-portada', window.scrollY < portada.offsetHeight - 96); }
+    revisar();
+    window.addEventListener('scroll', revisar, { passive: true });
+    window.addEventListener('resize', revisar);
+  });
+</script>

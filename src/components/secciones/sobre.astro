@@ -1,0 +1,44 @@
+---
+// Sobre la casa: foto vertical con marco dorado desplazado, `declaracion` (frase corta en cursiva grande),
+// `texto` en párrafos (línea en blanco entre párrafos) y `items` (valores) en una fila numerada.
+import { seccion, parrafos } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const romanos = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} class="sobre">
+      <div class:list={['grid items-center gap-12', s.imagen ? 'md:grid-cols-[5fr_7fr] md:gap-20' : 'max-w-3xl mx-auto']}>
+        {s.imagen && (
+          <div class="marco">
+            <Imagen src={s.imagen} alt="" ancho={900} alto={1200} class="aspect-[3/4] w-full object-cover" />
+          </div>
+        )}
+        <div>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          {s.declaracion && <p class="declaracion">{s.declaracion}</p>}
+          <div class="mt-6 space-y-4 text-[1.05rem] leading-relaxed opacity-90">
+            {parrafos(s.texto).map((p) => <p>{p}</p>)}
+          </div>
+          {s.cta?.url && <a class="btn mt-8" href={s.cta.url}>{s.cta.texto}</a>}
+        </div>
+      </div>
+      {s.items.length > 0 && (
+        <ul class="valores">
+          {s.items.map((it, i) => (
+            <li>
+              <span class="valores-num" aria-hidden="true">{romanos[i] ?? i + 1}</span>
+              <h3 class="valores-titulo">{it.titulo}</h3>
+              {it.texto && <p class="valores-texto">{it.texto}</p>}
+            </li>
+          ))}
+        </ul>
+      )}
+    </Seccion>
+  )
+}

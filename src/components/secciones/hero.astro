@@ -1,0 +1,54 @@
+---
+// Portada a pantalla completa: foto de fondo con degradado oscuro, título grande en serif y dos botones rectangulares.
+// La cabecera es transparente encima (ver Header.astro). `items`: detalles cortos en una línea bajo los botones.
+// Sin `cta`, el primer botón llama por teléfono; sin `cta_secundario`, el segundo lleva al mapa.
+import { seccion, site, tel, mapa } from '../../data/site';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+const c = site.contacto;
+const principal = s?.cta?.url ? s.cta : c.telefono ? { texto: c.telefono, url: tel(c.telefono) } : null;
+const secundario = s?.cta_secundario?.url
+  ? s.cta_secundario
+  : c.direccion
+    ? { texto: c.direccion, url: mapa(c.direccion) }
+    : null;
+const externo = (u: string) => /^https?:/.test(u);
+---
+
+{
+  s && (
+    <section id={id} class="portada">
+      <div class="portada-fondo" aria-hidden="true">
+        <Imagen src={s.imagen} alt="" ancho={1920} alto={1080} prioridad={primera} class="h-full w-full object-cover" />
+      </div>
+      <div class="contenedor portada-contenido">
+        {s.antetitulo && <p class="antetitulo antetitulo--claro">{s.antetitulo}</p>}
+        <h1 class="portada-titulo">{s.titulo || site.nombre}</h1>
+        {s.texto && <p class="portada-texto">{s.texto}</p>}
+        {(principal || secundario) && (
+          <div class="mt-9 flex flex-wrap gap-3">
+            {principal && (
+              <a class="btn btn--dorado" href={principal.url} {...(externo(principal.url) && { rel: 'noopener', target: '_blank' })}>
+                {principal.texto}
+              </a>
+            )}
+            {secundario && (
+              <a class="btn-sec btn-sec--claro" href={secundario.url} {...(externo(secundario.url) && { rel: 'noopener', target: '_blank' })}>
+                {secundario.texto}
+              </a>
+            )}
+          </div>
+        )}
+        {s.items.length > 0 && (
+          <ul class="portada-detalles">
+            {s.items.map((it) => (
+              <li>{it.titulo}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  )
+}

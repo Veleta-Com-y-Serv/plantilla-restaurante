@@ -1,0 +1,144 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas siempre planas (nunca una lista dentro de un elemento de lista). Precios siempre entre comillas.
+nombre: Casa Leandra
+eslogan: Cocina serrana de siempre a los pies de la catedral de Sigüenza.
+sector: restaurante
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = nombre en texto.
+colores:
+  primario: "#6e1f2c"
+  acento: "#c9a35c"
+  fondo: "#f7f1e6"
+  texto: "#2b1d1a"
+contacto:
+  telefono: "949 39 12 48"
+  email: reservas@casaleandra.es
+  direccion: Calle Mayor 32, 19250 Sigüenza (Guadalajara)
+  horario: "De miércoles a domingo, de 13:30 a 16:00. Viernes y sábado, también cenas de 20:30 a 23:00."
+  whatsapp: "+34 655 39 12 48"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: https://www.facebook.com/
+  linkedin: ""
+menu:
+  - { texto: Carta, url: "/#carta" }
+  - { texto: La casa, url: "/#sobre" }
+  - { texto: Fotos, url: "/#galeria" }
+  - { texto: Horario, url: "/#horario-ubicacion" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Reservar mesa, url: "/#reservas" }
+seo:
+  titulo: Casa Leandra · Restaurante de cocina serrana en Sigüenza
+  descripcion: "Restaurante familiar en la calle Mayor de Sigüenza: cabrito asado, migas, setas de temporada y postres caseros. Menú del día y reservas por WhatsApp."
+  tipo: Restaurant
+marca_pie: true
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: "Calle Mayor, 32 · Sigüenza"
+    titulo: Cocina serrana a fuego lento
+    texto: "Asados en horno de leña, guisos de cuchara y producto de la Sierra Norte. Una casa de piedra a dos pasos de la catedral."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Reservar mesa, url: "/#reservas" }
+    cta_secundario: { texto: Ver la carta, url: "/#carta" }
+    items:
+      - { titulo: Horno de leña }
+      - { titulo: Producto de la sierra }
+      - { titulo: Bodega de Guadalajara }
+
+  carta:
+    activa: true
+    antetitulo: La carta
+    titulo: Lo que sale de nuestra cocina
+    texto: "Cambiamos algunos platos según la temporada. Pregúntanos por las setas y la caza en otoño."
+    imagen: /fotos/carta.jpg
+    marca_destacado: De la casa
+    menu_dia:
+      titulo: Menú del día
+      precio: "19,50 €"
+      texto: |
+        De miércoles a viernes, a mediodía
+        Primero y segundo a elegir entre cuatro
+        Postre casero, pan y bebida
+    platos:
+      - { nombre: Migas del pastor con uvas, texto: "Con chorizo, panceta y huevo frito.", precio: "11,50 €", categoria: Para empezar }
+      - { nombre: Judiones de la sierra, texto: "Guisados a fuego lento con matanza.", precio: "12,00 €", categoria: Para empezar }
+      - { nombre: Ensalada de perdiz escabechada, texto: "Brotes tiernos, escabeche de la casa y piñones.", precio: "13,50 €", categoria: Para empezar }
+      - { nombre: Setas de temporada a la plancha, texto: "Con ajo, perejil y yema curada.", precio: "14,00 €", categoria: Para empezar, destacado: true }
+      - { nombre: Cabrito asado en horno de leña, texto: "Cuarto trasero, con patatas panadera. Por encargo los días de diario.", precio: "26,00 €", categoria: Asados y carnes, destacado: true }
+      - { nombre: Cordero lechal asado, texto: "Ración para una persona, con ensalada.", precio: "24,50 €", categoria: Asados y carnes }
+      - { nombre: Carrilleras al vino tinto, texto: "Melosas, con puré de patata.", precio: "17,00 €", categoria: Asados y carnes }
+      - { nombre: Lomo de bacalao a la arriera, texto: "Con pimientos, tomate y ajo.", precio: "18,50 €", categoria: Asados y carnes }
+      - { nombre: Torrijas de leche y miel de la Alcarria, precio: "6,50 €", categoria: Postres caseros, destacado: true }
+      - { nombre: Natillas de la abuela, precio: "5,00 €", categoria: Postres caseros }
+      - { nombre: Queso curado con membrillo, precio: "6,00 €", categoria: Postres caseros }
+
+  sobre:
+    activa: true
+    antetitulo: La casa
+    titulo: Tres generaciones en la calle Mayor
+    declaracion: "Aquí se cocina como en casa: sin prisa y con lo que da la sierra."
+    texto: |
+      Leandra abrió la casa de comidas en 1968, en los bajos de una casona de piedra. Hoy la llevan su nieta Marta, en la cocina, y Javier, en la sala.
+
+      El horno de leña es el mismo de entonces. Los asados salen de él cada día, y los guisos se hacen la víspera para que reposen.
+
+      Compramos a ganaderos y huertas de la comarca, y la bodega es casi toda de Guadalajara y de la Ribera del Duero.
+    imagen: /fotos/sobre.jpg
+    items:
+      - { titulo: Producto cercano, texto: "Carne, verdura y queso de la comarca de Sigüenza." }
+      - { titulo: Sin prisa, texto: "Guisos de la víspera y asados lentos en horno de leña." }
+      - { titulo: Trato de casa, texto: "Una sala pequeña, de doce mesas, donde te atendemos nosotros." }
+
+  galeria:
+    activa: true
+    antetitulo: Fotos
+    titulo: La sala, la cocina y la mesa
+    galeria:
+      - /fotos/galeria-1.jpg
+      - /fotos/galeria-2.jpg
+      - /fotos/galeria-3.jpg
+      - /fotos/galeria-4.jpg
+      - /fotos/galeria-5.jpg
+      - /fotos/galeria-6.jpg
+
+  reservas:
+    activa: true
+    antetitulo: Reservas
+    titulo: Reserva tu mesa
+    texto: "Los fines de semana se llena. Mejor reservar con un par de días."
+    items:
+      - { titulo: Elige día y hora, texto: "Comidas de 13:30 a 16:00 y cenas los viernes y sábados." }
+      - { titulo: Dinos cuántos sois, texto: "Y si hay alergias, niños o alguna celebración." }
+      - { titulo: Te confirmamos, texto: "Por WhatsApp o por teléfono, el mismo día." }
+    cta: { texto: Reservar por WhatsApp, url: "https://wa.me/34655391248?text=Hola%2C%20quiero%20reservar%20mesa" }
+    nota: "Grupos de más de 8 personas y cabrito por encargo, mejor por teléfono."
+
+  horario-ubicacion:
+    activa: true
+    antetitulo: Ven a vernos
+    titulo: Horario y dónde estamos
+    texto: "En plena calle Mayor, bajando de la catedral hacia la plaza. Aparcamiento en la Alameda, a cinco minutos a pie."
+    imagen: /fotos/fachada.jpg
+    horario:
+      - { dia: Lunes y martes, horas: Cerrado }
+      - { dia: Miércoles y jueves, horas: "13:30 – 16:00" }
+      - { dia: Viernes y sábado, horas: "13:30 – 16:00 y 20:30 – 23:00" }
+      - { dia: Domingo, horas: "13:30 – 16:30" }
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Lo que dicen quienes vienen
+    testimonios:
+      - { texto: "El cabrito, de los mejores que hemos probado. Y las torrijas, para volver solo por ellas.", autor: Elena G., nota: Google }
+      - { texto: "Sitio tranquilo, trato de casa y un menú del día que no tiene nada de menú.", autor: Raúl M., nota: Google }
+      - { texto: "Celebramos aquí el cumpleaños de mi padre. Nos prepararon todo con mucho cariño.", autor: Pilar S. }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: ¿Tienes alguna pregunta?
+    texto: "Celebraciones, menús de grupo o encargos para llevar. Escríbenos y te contestamos enseguida."

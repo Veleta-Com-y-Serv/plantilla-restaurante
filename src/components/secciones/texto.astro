@@ -1,0 +1,41 @@
+---
+// Apartado de texto genérico: antetítulo, título, párrafos, foto opcional con marco, lista con filetes y botón.
+// Lo usan los apartados nuevos que pide el cliente (site.yaml: `tipo: texto`).
+import { seccion, parrafos } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id}>
+      <div class:list={['grid items-center gap-12', s.imagen ? 'md:grid-cols-2 md:gap-20' : 'max-w-3xl mx-auto text-center']}>
+        {s.imagen && (
+          <div class="marco">
+            <Imagen src={s.imagen} alt="" ancho={1200} alto={900} class="aspect-[4/3] w-full object-cover" />
+          </div>
+        )}
+        <div>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          <div class="mt-6 space-y-4 leading-relaxed opacity-90">
+            {parrafos(s.texto).map((p) => <p>{p}</p>)}
+          </div>
+          {s.items.length > 0 && (
+            <ul class="lista-filetes">
+              {s.items.map((it) => (
+                <li>
+                  <p class="font-display text-lg">{it.titulo}</p>
+                  {it.texto && <p class="mt-1 text-sm opacity-80">{it.texto}</p>}
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.cta?.url && <a class="btn mt-8" href={s.cta.url}>{s.cta.texto}</a>}
+        </div>
+      </div>
+    </Seccion>
+  )
+}

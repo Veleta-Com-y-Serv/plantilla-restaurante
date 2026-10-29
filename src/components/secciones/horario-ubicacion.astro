@@ -1,0 +1,64 @@
+---
+// Horario y ubicación: horario (`horario` [{dia, horas}]) en serif con filetes, foto o plano (`imagen`)
+// y la dirección de site.yaml → contacto con botón a mapas (sin iframe, para que la web vaya rápida).
+import { seccion, site, mapa, tel } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id}>
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      <div class:list={['grid gap-10', s.imagen ? 'md:grid-cols-2 md:gap-16' : 'max-w-2xl mx-auto']}>
+        <div class="flex flex-col">
+          {s.horario.length > 0 ? (
+            <table class="horario">
+              <caption class="sr-only">Horario</caption>
+              <tbody>
+                {s.horario.map((h) => (
+                  <tr>
+                    <th scope="row">{h.dia}</th>
+                    <td>{h.horas}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            c.horario && <p class="horario-suelto">{c.horario}</p>
+          )}
+          {c.direccion && (
+            <p class="direccion">
+              <Icono nombre="mapa" class="mt-1 shrink-0 text-acento" />
+              <span>{c.direccion}</span>
+            </p>
+          )}
+          <div class="mt-8 flex flex-wrap gap-3">
+            {c.direccion && (
+              <a class="btn" href={mapa(c.direccion)} rel="noopener" target="_blank">
+                Cómo llegar
+              </a>
+            )}
+            {c.telefono && <a class="btn-sec" href={tel(c.telefono)}>{c.telefono}</a>}
+          </div>
+        </div>
+        {s.imagen && (
+          c.direccion ? (
+            <a href={mapa(c.direccion)} rel="noopener" target="_blank" class="marco marco--fino" aria-label={`Ver ${c.direccion} en el mapa`}>
+              <Imagen src={s.imagen} alt="" ancho={1200} alto={900} class="aspect-[4/3] w-full object-cover" />
+            </a>
+          ) : (
+            <div class="marco marco--fino">
+              <Imagen src={s.imagen} alt="" ancho={1200} alto={900} class="aspect-[4/3] w-full object-cover" />
+            </div>
+          )
+        )}
+      </div>
+    </Seccion>
+  )
+}

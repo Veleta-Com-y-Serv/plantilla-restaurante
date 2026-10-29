@@ -1,0 +1,35 @@
+---
+// Galería en mosaico de columnas CSS: cada foto con su proporción (vertical, cuadrada, apaisada, en ciclo).
+// Fotos en site.yaml → secciones.<id>.galeria (lista de rutas).
+import { seccion, site } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const formas = [
+  { clase: 'aspect-[3/4]', ancho: 900, alto: 1200 },
+  { clase: 'aspect-square', ancho: 900, alto: 900 },
+  { clase: 'aspect-[4/3]', ancho: 1200, alto: 900 },
+];
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} class="galeria">
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {s.galeria.length > 0 && (
+        <ul class="mosaico">
+          {s.galeria.map((foto, i) => {
+            const f = formas[i % formas.length];
+            return (
+              <li>
+                <Imagen src={foto} alt={`${site.nombre}, foto ${i + 1}`} ancho={f.ancho} alto={f.alto} class={`${f.clase} w-full object-cover`} />
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </Seccion>
+  )
+}

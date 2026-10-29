@@ -1,0 +1,46 @@
+---
+// Reservas: banda oscura con los pasos (`items`), botón (`cta`, normalmente WhatsApp), `nota` (p. ej. grupos)
+// y formulario con día, hora y personas que abre el correo (mailto). Sin `cta`, el botón llama por teléfono.
+import { seccion, site, tel } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+const boton = s?.cta?.url ? s.cta : c.telefono ? { texto: c.telefono, url: tel(c.telefono) } : null;
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} class="banda-oscura">
+      <div class="grid gap-12 lg:grid-cols-2 lg:gap-20">
+        <div>
+          <Titular alinear="izquierda" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+          {s.items.length > 0 && (
+            <ol class="pasos">
+              {s.items.map((it, i) => (
+                <li>
+                  <span class="pasos-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <div>
+                    <p class="pasos-titulo">{it.titulo}</p>
+                    {it.texto && <p class="pasos-texto">{it.texto}</p>}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          )}
+          {boton && (
+            <a class="btn btn--dorado mt-10" href={boton.url} {...(/^https?:/.test(boton.url) && { rel: 'noopener', target: '_blank' })}>
+              {boton.texto}
+            </a>
+          )}
+          {s.nota && <p class="nota">{s.nota}</p>}
+        </div>
+        <div class="hoja">
+          <FormularioContacto reserva prefijo={`r-${Astro.props.id}`} boton="Pedir mesa" asunto={`Reserva en ${site.nombre}`} />
+        </div>
+      </div>
+    </Seccion>
+  )
+}

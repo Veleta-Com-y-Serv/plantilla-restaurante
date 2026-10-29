@@ -1,0 +1,24 @@
+---
+// Imagen con carga diferida por defecto. `prioridad` para la del hero (se carga al momento).
+// Si una foto de /fotos/ todavía no existe, se ve su respaldo /placeholders/<mismo nombre>.svg.
+interface Props { src?: string; alt?: string; ancho?: number; alto?: number; class?: string; prioridad?: boolean }
+const { src, alt = '', ancho = 800, alto = 600, class: clase = '', prioridad = false } = Astro.props;
+const respaldo = src && src.startsWith('/fotos/') ? src.replace('/fotos/', '/placeholders/').replace(/\.[a-z0-9]+$/i, '.svg') : '';
+const alFallar = respaldo ? `this.onerror=null;this.src='${respaldo}'` : undefined;
+---
+
+{
+  src && (
+    <img
+      src={src}
+      alt={alt}
+      width={ancho}
+      height={alto}
+      class={clase}
+      loading={prioridad ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={prioridad ? 'high' : undefined}
+      onerror={alFallar}
+    />
+  )
+}
